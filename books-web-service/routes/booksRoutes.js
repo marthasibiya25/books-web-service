@@ -3,10 +3,19 @@ import booksController from "../controllers/booksController.js";
 
 const router = express.Router();
 
-// Get all books
+// GET all books
 router.get("/", booksController.getAllBooks);
 
-// Get a single book
+// GET one book
 router.get("/:id", booksController.getSingleBook);
+
+// CREATE a book
+router.post("/", booksController.createBook);
+
+// UPDATE a book
+router.put("/:id", booksController.updateBook);
+
+// DELETE a book
+router.delete("/:id", booksController.deleteBook);
 
 export default router;

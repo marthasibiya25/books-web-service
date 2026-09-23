@@ -1,4 +1,5 @@
 import authors from "../models/authors.js";
+import books from "../models/books.js";
 
 // GET all authors
 export const getAllAuthors = (req, res) => {
@@ -153,6 +154,16 @@ export const deleteAuthor = (req, res) => {
             });
         }
 
+        const hasBooks = books.some(
+            (book) => book.authorId === req.params.id
+        );
+
+        if (hasBooks) {
+            return res.status(400).json({
+                error: "Cannot delete an author who has books.",
+            });
+        }
+
         authors.splice(authorIndex, 1);
 
         res.status(204).send();
@@ -162,3 +173,4 @@ export const deleteAuthor = (req, res) => {
         });
     }
 };
+
