@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import booksRoutes from "./routes/booksRoutes.js";
 import authorsRoutes from "./routes/authorsRoutes.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.js";
 
 dotenv.config();
 
@@ -21,6 +23,9 @@ app.use("/api/books", booksRoutes);
 // Authors routes
 app.use("/api/authors", authorsRoutes);
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
